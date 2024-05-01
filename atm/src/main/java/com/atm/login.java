@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 
 public class login extends JFrame implements ActionListener {
 
@@ -31,7 +33,6 @@ public class login extends JFrame implements ActionListener {
         cardtext = new JTextField(10);
         cardtext.setBounds(400,150,250,40);
         cardtext.setFont(new Font("Osward", Font.BOLD, 18));
-
         add(cardtext);
 
 
@@ -75,20 +76,43 @@ public class login extends JFrame implements ActionListener {
 
         getContentPane().setBackground(Color.WHITE);
         setSize(1000, 600);
+        setLocation(350,100);
         setVisible(true);
 
     }
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()== signinbtn){
-            
+            conn con = new conn();
+            String ct = cardtext.getText();
+            String pt = pintext.getText();
+            String query = "SELECT * FROM login WHERE Card_Num = '" + ct +"' AND Card_Pin = '"+pt+"' ;";
+            try
+            {
+                ResultSet rs = con.s.executeQuery(query);
+                if(rs.next())
+                {
+                    setVisible(false);
+                    new transaction().setVisible(true);
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null,"Invaild Details.");
+                }
+
+            }
+            catch(Exception exception)
+            {
+                System.out.println(exception);
+            }
         }
         else if (e.getSource()==clrbtn) {
             cardtext.setText("");
             pintext.setText("");
         }
         else if (e.getSource()==signupbtn) {
-
+            setVisible(false);
+            new signupOne().setVisible(true);
         }
     }
 
