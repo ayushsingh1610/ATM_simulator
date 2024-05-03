@@ -7,7 +7,8 @@ import java.awt.event.ActionListener;
 
 public class changepin extends JFrame implements ActionListener {
     JLabel tittle, oldpin, pin, newpin;
-    JTextField oldpintext, pintext, newpintext;
+    JTextField oldpintext, pintext;
+    JPasswordField newpintext;
     JButton submitbtn, backbtn;
     changepin()
     {
@@ -52,7 +53,7 @@ public class changepin extends JFrame implements ActionListener {
         pintext.setFont(new Font("System", Font.PLAIN, 15));
         add(pintext);
 
-        newpintext = new JTextField();
+        newpintext = new JPasswordField();
         newpintext.setBounds(300,200,200,30);
         newpintext.setForeground(Color.BLACK);
         newpintext.setBorder(BorderFactory.createLineBorder(Color.white));
@@ -103,6 +104,7 @@ public class changepin extends JFrame implements ActionListener {
                     String query = "UPDATE login SET Card_Pin = " + np + " WHERE Card_Pin = " + op + ";";
                     con.s.execute(query);
 
+                    JOptionPane.showMessageDialog(null,"Pin changed successfully.");
                     setVisible(false);
                     new transaction().setVisible(true);
                 } catch (Exception exception) {

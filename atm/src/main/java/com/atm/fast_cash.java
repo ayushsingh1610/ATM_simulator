@@ -9,7 +9,7 @@ import java.util.Date;
 
 public class fast_cash extends JFrame implements ActionListener {
     JLabel l1;
-    JButton btn1,btn2,btn3,btn4,btn5,btn6,submitbtn;
+    JButton btn1,btn2,btn3,btn4,btn5,btn6,backbtn;
 
     fast_cash()
     {
@@ -76,14 +76,14 @@ public class fast_cash extends JFrame implements ActionListener {
         btn6.addActionListener(this);
         add(btn6);
 
-        /*submitbtn = new JButton("Submit");
-        submitbtn.setBounds(325,375,100,30);
-        submitbtn.setFont(new Font("Osward",Font.BOLD,15));
-        submitbtn.setForeground(Color.BLACK);
-        submitbtn.setBackground(Color.WHITE);
-        submitbtn.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        submitbtn.addActionListener(this);
-        add(submitbtn);*/
+        backbtn = new JButton("Back");
+        backbtn.setBounds(400,350,150,30);
+        backbtn.setFont(new Font("Osward",Font.BOLD,15));
+        backbtn.setForeground(Color.BLACK);
+        backbtn.setBackground(Color.WHITE);
+        backbtn.setBorder(BorderFactory.createLineBorder(Color.white));
+        backbtn.addActionListener(this);
+        add(backbtn);
 
         getContentPane().setBackground(Color.BLACK);
         setSize(800,600);
@@ -99,50 +99,55 @@ public class fast_cash extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String a = "";
         Date d = new Date();
-        try {
-            if (e.getSource() == btn1) {
-                a += "200";
-            } else if (e.getSource() == btn2) {
-                a += "500";
-            } else if (e.getSource() == btn3) {
-                a += "1000";
-            } else if (e.getSource() == btn4) {
-                a += "2000";
-            } else if (e.getSource() == btn5) {
-                a += "5000";
-            } else if (e.getSource() == btn6) {
-                a += "10000";
-            }
-            conn con = new conn();
+        if(e.getSource() == backbtn)
+        {
+            new transaction().setVisible(true);
+        }
+        else {
             try {
-                String query1 = "SELECT * FROM amount;";
-                ResultSet rs = con.s.executeQuery(query1);
-                if (rs.next()) {
-                    int lastamt = Integer.parseInt(rs.getString("amt"));
-                    if (Integer.parseInt(a) >= lastamt) {
-                        JOptionPane.showMessageDialog(null, "Insufficient Balance");
-                    } else {
-                        int updateamt = lastamt - Integer.parseInt(a);
-                        String updatequery =
-                                "UPDATE amount SET amt = '" + Integer.toString(updateamt) + "' WHERE amt = '" + Integer.toString(lastamt) + "';";
-                        con.s.execute(updatequery);
-
-
-                        String query = "INSERT INTO statement VALUES ('" + d + "', '" + a + "', 'Withdrawn');";
-                        con.s.execute(query);
-                        JOptionPane.showMessageDialog(null, "Rs. " + a + " is withdrawn from your Account.");
-                        setVisible(false);
-                        new transaction().setVisible(true);
-                    }
+                if (e.getSource() == btn1) {
+                    a += "200";
+                } else if (e.getSource() == btn2) {
+                    a += "500";
+                } else if (e.getSource() == btn3) {
+                    a += "1000";
+                } else if (e.getSource() == btn4) {
+                    a += "2000";
+                } else if (e.getSource() == btn5) {
+                    a += "5000";
+                } else if (e.getSource() == btn6) {
+                    a += "10000";
+                } else if (e.getSource() == backbtn) {
+                    new transaction().setVisible(true);
                 }
-                JOptionPane.showMessageDialog(null, "Rs. " + a + " is withdrawn from your Account.");
-                setVisible(false);
-                new transaction().setVisible(true);
-            } catch (Exception exception) {
-                System.out.println(exception);
+                conn con = new conn();
+                try {
+                    String query1 = "SELECT * FROM amount;";
+                    ResultSet rs = con.s.executeQuery(query1);
+                    if (rs.next()) {
+                        long lastamt = Long.parseLong(rs.getString("amt"));
+                        if (Long.parseLong(a) >= lastamt) {
+                            JOptionPane.showMessageDialog(null, "Insufficient Balance");
+                        } else {
+                            long updateamt = lastamt - Long.parseLong(a);
+                            String updatequery =
+                                    "UPDATE amount SET amt = '" + Long.toString(updateamt) + "' WHERE amt = '" + Long.toString(lastamt) + "';";
+                            con.s.execute(updatequery);
+
+                            String query = "INSERT INTO statement VALUES ('" + d + "', '" + a + "', 'Withdrawn');";
+                            con.s.execute(query);
+                            JOptionPane.showMessageDialog(null, "Rs. " + a + " is withdrawn from your Account.");
+                            setVisible(false);
+                            new transaction().setVisible(true);
+                        }
+                    }
+                } catch (Exception exception) {
+                    System.out.println(exception);
+                }
+
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
             }
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
         }
     }
 }

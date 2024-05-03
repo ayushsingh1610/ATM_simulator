@@ -85,15 +85,15 @@ public class withdraw extends JFrame implements ActionListener {
                     String query1 = "SELECT * FROM amount;";
                     ResultSet rs = con.s.executeQuery(query1);
                     if (rs.next()) {
-                        int lastamt = Integer.parseInt(rs.getString("amt"));
-                        if(Integer.parseInt(amt) >= lastamt)
+                        long lastamt = Long.parseLong(rs.getString("amt"));
+                        if(Long.parseLong(amt) >= lastamt)
                         {
                             JOptionPane.showMessageDialog(null, "Insufficient Balance");
                         }
                         else{
-                            int updateamt = lastamt - Integer.parseInt(amt);
+                            long updateamt = lastamt - Long.parseLong(amt);
                             String updatequery =
-                                    "UPDATE amount SET amt = '" + Integer.toString(updateamt) + "' WHERE amt = '" + Integer.toString(lastamt) + "';";
+                                    "UPDATE amount SET amt = '" + Long.toString(updateamt) + "' WHERE amt = '" + Long.toString(lastamt) + "';";
                             con.s.execute(updatequery);
 
 

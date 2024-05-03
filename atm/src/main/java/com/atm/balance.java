@@ -8,7 +8,8 @@ import java.sql.ResultSet;
 
 public class balance extends JFrame implements ActionListener {
     JLabel tittle, info;
-    int amt;
+    JButton backbtn;
+    long amt;
     balance()
     {
         setTitle("Balance Enquiry");
@@ -25,7 +26,7 @@ public class balance extends JFrame implements ActionListener {
             String query1 = "SELECT * FROM amount;";
             ResultSet rs = con.s.executeQuery(query1);
             if(rs.next()){
-                amt = Integer.parseInt(rs.getString("amt"));
+                amt = Long.parseLong(rs.getString("amt"));
             }
             else
             {
@@ -44,6 +45,15 @@ public class balance extends JFrame implements ActionListener {
         info.setForeground(Color.white);
         add(info);
 
+        backbtn = new JButton("Back");
+        backbtn.setBounds(250,250,150,30);
+        backbtn.setFont(new Font("Osward",Font.BOLD,15));
+        backbtn.setForeground(Color.BLACK);
+        backbtn.setBackground(Color.WHITE);
+        backbtn.setBorder(BorderFactory.createLineBorder(Color.white));
+        backbtn.addActionListener(this);
+        add(backbtn);
+
         getContentPane().setBackground(Color.BLACK);
         setSize(800,600);
         setLocation(400,50);
@@ -57,6 +67,10 @@ public class balance extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        if(e.getSource() == backbtn)
+        {
+            setVisible(false);
+            new transaction().setVisible(true);
+        }
     }
 }

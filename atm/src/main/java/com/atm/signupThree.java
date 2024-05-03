@@ -207,6 +207,7 @@ public class signupThree extends JFrame implements ActionListener {
                 String loginquery = "INSERT INTO login VALUES ('" + cn + "','" + p + "');";
                 con.s.executeUpdate(query);
                 con.s.executeUpdate(loginquery);
+                con.s.executeUpdate("INSERT INTO amount VALUES ('0');");
                 setVisible(false);
                 new transaction().setVisible(true);
             }

@@ -1,0 +1,118 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Java",
+            "type": "java",
+            "request": "launch",
+            "stopOnEntry": true,
+            "jdkPath": "${env:JAVA_HOME}/bin",
+            "cwd": "${fileDirname}",
+            "startupClass": "${fileBasenameNoExtension}",
+            "classpath": [
+                ".",
+                "${fileDirname}"
+            ]
+        },
+        {
+            "name": "Java Console App",
+            "type": "java",
+            "request": "launch",
+            "stopOnEntry": true,
+            "jdkPath": "${env:JAVA_HOME}/bin",
+            "cwd": "${fileDirname}",
+            "startupClass": "${fileBasenameNoExtension}",
+            "classpath": [
+                ".",
+                "${fileDirname}"
+            ],
+            "externalConsole": true
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "balance",
+            "request": "launch",
+            "mainClass": "com.atm.balance",
+            "projectName": "atm"
+        },
+        {
+            "type": "java",
+            "name": "changepin",
+            "request": "launch",
+            "mainClass": "com.atm.changepin",
+            "projectName": "atm"
+        },
+        {
+            "type": "java",
+            "name": "deposit",
+            "request": "launch",
+            "mainClass": "com.atm.deposit",
+            "projectName": "atm"
+        },
+        {
+            "type": "java",
+            "name": "fast_cash",
+            "request": "launch",
+            "mainClass": "com.atm.fast_cash",
+            "projectName": "atm"
+        },
+        {
+            "type": "java",
+            "name": "login",
+            "request": "launch",
+            "mainClass": "com.atm.login",
+            "projectName": "atm"
+        },
+        {
+            "type": "java",
+            "name": "ministatement",
+            "request": "launch",
+            "mainClass": "com.atm.ministatement",
+            "projectName": "atm"
+        },
+        {
+            "type": "java",
+            "name": "signupOne",
+            "request": "launch",
+            "mainClass": "com.atm.signupOne",
+            "projectName": "atm"
+        },
+        {
+            "type": "java",
+            "name": "signupThree",
+            "request": "launch",
+            "mainClass": "com.atm.signupThree",
+            "projectName": "atm"
+        },
+        {
+            "type": "java",
+            "name": "signupTwo",
+            "request": "launch",
+            "mainClass": "com.atm.signupTwo",
+            "projectName": "atm"
+        },
+        {
+            "type": "java",
+            "name": "transaction",
+            "request": "launch",
+            "mainClass": "com.atm.transaction",
+            "projectName": "atm"
+        },
+        {
+            "type": "java",
+            "name": "withdraw",
+            "request": "launch",
+            "mainClass": "com.atm.withdraw",
+            "projectName": "atm"
+        }
+    ]
+}
