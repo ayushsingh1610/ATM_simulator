@@ -1,7 +1,7 @@
 
 # ATM Simulator
 
-A mini project of atm simulator developed by using Java, Swing and Mysql.
+A mini project of atm simulator developed using Java, Swing and Mysql.
 
 ## Technologies Used
 
